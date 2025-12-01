@@ -1,0 +1,5 @@
+<Project>
+  <Target Name="CustomAfterBuildTarget" AfterTargets="Build">
+    <Message Text="Hello from CustomAfterBuildTarget" Importance="high" />
+  </Target>
+</Project>
