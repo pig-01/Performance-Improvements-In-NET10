@@ -1,7 +1,8 @@
 ﻿// dotnet run -c Release -f net9.0 --filter "*" --runtimes net9.0 net10.0
 using BenchmarkDotNet.Running;
-using NET10PerformanceImprovements.Tests.Devirtualization;
-using NET10PerformanceImprovements.Tests.StackAllocation;
+using BoundsChecking = NET10PerformanceImprovements.Tests.BoundsChecking;
+using Devirtualization = NET10PerformanceImprovements.Tests.Devirtualization;
+using StackAllocation = NET10PerformanceImprovements.Tests.StackAllocation;
 
 string? input = string.Empty;
 
@@ -14,13 +15,21 @@ while (true)
     // Show benchmarks menu
     Console.WriteLine(
         $@"
-Select a benchmark to run:
-1. {nameof(NET10PerformanceImprovements.Tests.StackAllocation)} {nameof(DelegateTest)}
-2. {nameof(NET10PerformanceImprovements.Tests.StackAllocation)} {nameof(StackAllocationTest)}
-3. {nameof(NET10PerformanceImprovements.Tests.StackAllocation)} {nameof(EscapeAnalysisTest)}
-4. {nameof(NET10PerformanceImprovements.Tests.Devirtualization)} {nameof(ArrayTest)}
-5. {nameof(NET10PerformanceImprovements.Tests.Devirtualization)} {nameof(ListTest)}
-6. {nameof(NET10PerformanceImprovements.Tests.Devirtualization)} {nameof(LinqTest)}
+{nameof(StackAllocation)} Benchmarks:
+1. {nameof(StackAllocation.DelegateTest)}
+2. {nameof(StackAllocation.StackAllocationTest)}
+3. {nameof(StackAllocation.EscapeAnalysisTest)}
+
+{nameof(Devirtualization)} Benchmarks:
+4. {nameof(Devirtualization.ArrayTest)}
+5. {nameof(Devirtualization.ListTest)}
+6. {nameof(Devirtualization.LinqTest)}
+7. {nameof(Devirtualization.GenericEqualsTest)}
+
+{nameof(BoundsChecking)} Benchmarks:
+8. {nameof(BoundsChecking.StaticArrayTest)}
+9. {nameof(BoundsChecking.ArrayTest)}
+10. {nameof(BoundsChecking.Log2SoftwareFallbackTest)}
 "
     );
 
@@ -30,22 +39,34 @@ Select a benchmark to run:
     switch (input)
     {
         case "1":
-            BenchmarkRunner.Run<DelegateTest>(null, args);
+            BenchmarkRunner.Run<StackAllocation.DelegateTest>(null, args);
             break;
         case "2":
-            BenchmarkRunner.Run<StackAllocationTest>(null, args);
+            BenchmarkRunner.Run<StackAllocation.StackAllocationTest>(null, args);
             break;
         case "3":
-            BenchmarkRunner.Run<EscapeAnalysisTest>(null, args);
+            BenchmarkRunner.Run<StackAllocation.EscapeAnalysisTest>(null, args);
             break;
         case "4":
-            BenchmarkRunner.Run<ArrayTest>(null, args);
+            BenchmarkRunner.Run<Devirtualization.ArrayTest>(null, args);
             break;
         case "5":
-            BenchmarkRunner.Run<ListTest>(null, args);
+            BenchmarkRunner.Run<Devirtualization.ListTest>(null, args);
             break;
         case "6":
-            BenchmarkRunner.Run<LinqTest>(null, args);
+            BenchmarkRunner.Run<Devirtualization.LinqTest>(null, args);
+            break;
+        case "7":
+            BenchmarkRunner.Run<Devirtualization.GenericEqualsTest>(null, args);
+            break;
+        case "8":
+            BenchmarkRunner.Run<BoundsChecking.ArrayTest>(null, args);
+            break;
+        case "9":
+            BenchmarkRunner.Run<BoundsChecking.StaticArrayTest>(null, args);
+            break;
+        case "10":
+            BenchmarkRunner.Run<BoundsChecking.Log2SoftwareFallbackTest>(null, args);
             break;
         default:
             Console.WriteLine("Invalid input. Please try again.");

@@ -3,6 +3,9 @@ using BenchmarkDotNet.Attributes;
 
 namespace NET10PerformanceImprovements.Tests.StackAllocation;
 
+/// <summary>
+/// Benchmark to test stack allocation improvements in .NET 10.
+/// </summary>
 [MemoryDiagnoser(displayGenColumns: false)]
 [HideColumns("Job", "Error", "StdDev", "Median", "RatioSD")]
 public partial class StackAllocationTest
@@ -20,7 +23,8 @@ public partial class StackAllocationTest
             }
 
             [MethodImpl(MethodImplOptions.NoInlining)]
-            static void Use(string input) { }
+            static void Use(string input)
+            { }
         }
     }
 }

@@ -3,6 +3,9 @@ using BenchmarkDotNet.Attributes;
 
 namespace NET10PerformanceImprovements.Tests.Devirtualization;
 
+/// <summary>
+/// Tests the performance of LINQ devirtualization in .NET 10.
+/// </summary>
 [HideColumns("Job", "Error", "StdDev", "Median", "RatioSD")]
 public class LinqTest
 {

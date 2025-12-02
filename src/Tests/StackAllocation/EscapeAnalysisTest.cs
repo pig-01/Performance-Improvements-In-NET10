@@ -3,6 +3,9 @@ using BenchmarkDotNet.Attributes;
 
 namespace NET10PerformanceImprovements.Tests.StackAllocation;
 
+/// <summary>
+/// Benchmark to test escape analysis improvements in .NET 10.
+/// </summary>
 [MemoryDiagnoser(displayGenColumns: false)]
 [HideColumns("Job", "Error", "StdDev", "Median", "RatioSD")]
 public class EscapeAnalysisTest

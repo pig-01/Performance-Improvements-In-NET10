@@ -2,6 +2,9 @@
 
 namespace NET10PerformanceImprovements.Tests.StackAllocation;
 
+/// <summary>
+/// Benchmark to test delegate allocation improvements in .NET 10.
+/// </summary>
 [DisassemblyDiagnoser]
 [MemoryDiagnoser(displayGenColumns: false)]
 [HideColumns("Job", "Error", "StdDev", "Median", "RatioSD", "y")]
